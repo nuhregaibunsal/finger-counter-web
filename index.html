@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finger Counter</title>
+  </head>
+  <body>
+    <main>
+      <h1>Finger Counter</h1>
+      <p class="lead">Hand tracking in your browser. Pick a video, or turn on the webcam.</p>
+      <div class="controls">
+        <label class="btn">
+          Upload video
+          <input id="file" type="file" accept="video/*" hidden />
+        </label>
+        <button id="webcam" class="btn" type="button">Use webcam</button>
+      </div>
+      <p id="status" role="status">Loading hand model…</p>
+      <div class="stage">
+        <video id="video" playsinline muted controls></video>
+        <canvas id="overlay"></canvas>
+      </div>
+      <p class="note">Video never leaves your device; all processing happens locally.</p>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
