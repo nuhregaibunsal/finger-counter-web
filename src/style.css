@@ -10,3 +10,11 @@ h1 { margin: 0 0 .25rem; }
 .stage { position: relative; width: 100%; background: #000; border-radius: 8px; overflow: hidden; }
 .stage video { display: block; width: 100%; height: auto; }
 .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+.count {
+  font-size: clamp(4rem, 18vw, 9rem);
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  margin: 0.5rem 0;
+}

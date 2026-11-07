@@ -1,5 +1,6 @@
 import "./style.css";
 import { drawHands, type Point } from "./landmarks";
+import { countFingers, type Handedness } from "./counter";
 
 const VERSION = "0.10.21";
 const CDN = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${VERSION}`;
@@ -7,12 +8,13 @@ const MODEL =
   "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task";
 
 interface HandLandmarkerLike {
-  detectForVideo(video: HTMLVideoElement, ts: number): { landmarks: Point[][] };
+  detectForVideo(video: HTMLVideoElement, ts: number): { landmarks: Point[][]; handedness: { categoryName: string }[][] };
 }
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const video = $<HTMLVideoElement>("video");
 const canvas = $<HTMLCanvasElement>("overlay");
+const countEl = $<HTMLDivElement>("count");
 const status = $<HTMLParagraphElement>("status");
 const ctx = canvas.getContext("2d")!;
 
@@ -38,6 +40,11 @@ function loop(): void {
     }
     const result = landmarker.detectForVideo(video, performance.now());
     drawHands(ctx, result.landmarks);
+    const total = result.landmarks.reduce((sum, hand, i) => {
+      const label = (result.handedness[i]?.[0]?.categoryName ?? "Right") as Handedness;
+      return sum + countFingers(hand, label);
+    }, 0);
+    countEl.textContent = result.landmarks.length ? String(total) : "–";
     status.textContent = `${result.landmarks.length} hand(s) detected`;
   }
   requestAnimationFrame(loop);
