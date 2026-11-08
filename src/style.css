@@ -18,3 +18,17 @@ h1 { margin: 0 0 .25rem; }
   text-align: center;
   margin: 0.5rem 0;
 }
+
+.bubbles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.bubble {
+  position: absolute; bottom: 0; width: 4rem; height: 4rem; margin-left: -2rem;
+  border-radius: 50%; display: grid; place-items: center; font-size: 2rem; font-weight: 700;
+  color: #0b1d14; background: rgba(149, 213, 178, .9); border: 3px solid #d8f3dc;
+  animation-name: rise; animation-timing-function: linear; animation-fill-mode: forwards;
+}
+@keyframes rise { to { transform: translateY(calc(-1 * var(--stage-h, 24rem))); } }
+.hud { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; margin-top: .75rem; }
+.hud[hidden], .hud [hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .bubble { animation: none; bottom: auto; top: 1rem; }
+}

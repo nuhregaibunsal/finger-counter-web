@@ -15,12 +15,20 @@
           <input id="file" type="file" accept="video/*" hidden />
         </label>
         <button id="webcam" class="btn" type="button">Use webcam</button>
+        <button id="play" class="btn" type="button">Play bubble game</button>
       </div>
       <div id="count" class="count" aria-live="polite">–</div>
       <p id="status" role="status">Loading hand model…</p>
       <div class="stage">
         <video id="video" playsinline muted controls></video>
         <canvas id="overlay"></canvas>
+        <div id="bubbles" class="bubbles" aria-hidden="true"></div>
+      </div>
+      <div id="hud" class="hud" hidden>
+        <span>Score <strong id="score">0</strong></span>
+        <span>Lives <strong id="lives">3</strong></span>
+        <span id="game-msg" role="status">Show the number on a bubble and hold it.</span>
+        <button id="restart" class="btn" type="button" hidden>Play again</button>
       </div>
       <p class="note">Video never leaves your device; all processing happens locally.</p>
     </main>
