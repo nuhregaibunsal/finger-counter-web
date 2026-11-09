@@ -4,24 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finger Counter</title>
+    <meta name="description" content="Count the fingers you hold up, in your browser. Hand tracking runs locally; video never leaves your device." />
   </head>
   <body>
+    <a class="skip" href="#count">Skip to count</a>
     <main>
       <h1>Finger Counter</h1>
       <p class="lead">Hand tracking in your browser. Pick a video, or turn on the webcam.</p>
       <div class="controls">
-        <label class="btn">
-          Upload video
-          <input id="file" type="file" accept="video/*" hidden />
-        </label>
+        <button id="upload" class="btn" type="button">Upload video</button>
+        <input id="file" type="file" accept="video/*" hidden />
         <button id="webcam" class="btn" type="button">Use webcam</button>
         <button id="play" class="btn" type="button">Play bubble game</button>
       </div>
-      <div id="count" class="count" aria-live="polite">–</div>
+      <div id="count" class="count" role="status" aria-live="polite" aria-label="Finger count" tabindex="-1">–</div>
       <p id="status" role="status">Loading hand model…</p>
       <div class="stage">
-        <video id="video" playsinline muted controls></video>
-        <canvas id="overlay"></canvas>
+        <video id="video" playsinline muted controls aria-label="Video being analysed for hands"></video>
+        <canvas id="overlay" aria-hidden="true"></canvas>
         <div id="bubbles" class="bubbles" aria-hidden="true"></div>
       </div>
       <div id="hud" class="hud" hidden>
@@ -30,7 +30,10 @@
         <span id="game-msg" role="status">Show the number on a bubble and hold it.</span>
         <button id="restart" class="btn" type="button" hidden>Play again</button>
       </div>
-      <p class="note">Video never leaves your device; all processing happens locally.</p>
+      <section class="privacy" aria-labelledby="privacy-h">
+        <h2 id="privacy-h">Privacy</h2>
+        <p>Your video and webcam frames never leave your device. Hand tracking runs locally in your browser; nothing is uploaded or stored. Only the hand-tracking library and model file are downloaded from public CDNs.</p>
+      </section>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>

@@ -109,6 +109,8 @@ function setSource(): void {
   void video.play().catch(() => undefined);
 }
 
+$("upload").addEventListener("click", () => $<HTMLInputElement>("file").click());
+
 $<HTMLInputElement>("file").addEventListener("change", (e) => {
   const file = (e.target as HTMLInputElement).files?.[0];
   if (!file) return;
